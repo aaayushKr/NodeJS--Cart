@@ -36,12 +36,12 @@ exports.getCart = (req, res, next) => {
   Cart.getCart((cart) => {
     Product.fetchAll((products) => {
       const cartProducts = [];
-      for (product of products) {
+      for (products of products) {
         const cartProductData = cart.products.find(
-          (prod) => prod.id === product.id
+          (prod) => prod.id === products.id
         );
         if (cartProductData) {
-          cartProducts.push({productData: product, qty: cartProductData.qty});
+          cartProducts.push({productData: products, qty: cartProductData.qty});
         }
       }
       res.render("shop/cart", {
