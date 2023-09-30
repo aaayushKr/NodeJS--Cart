@@ -7,10 +7,22 @@
     "csurf": "^1.11.0",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
-    "express-handlebars": "^7.1.1",
+    "express-handlebars": "^7.1.2",
     "express-session": "^1.17.3",
-    "mongodb": "^5.7.0",
-    "mongoose": "^7.4.2",
+    "mongodb": "^6.1.0",
+    "mongoose": "^7.5.3",
     "pug": "^3.0.2"
+  },
+  "scripts": {
+    "dev": "webpack --config=Scripts/config/webpack.dev.js --watch",
+    "build": "webpack --config=Scripts/config/webpack.prod.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --config=config/webpack.dev.js",
+    "prod": "webpack --config=config/webpack.prod.js"
+  },
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   }
 }
