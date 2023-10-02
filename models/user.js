@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+// Define the structure of the 'users' collection in the MongoDB database using Mongoose Schema
 const userSchema = new Schema({
   email: {
     type: String,
@@ -16,15 +17,19 @@ const userSchema = new Schema({
       {
         productId: {
           type: Schema.Types.ObjectId,
-          ref: "Product",
+          ref: "Product", // Reference to the 'Product' model in the database, indicating the product in the cart
+          required: true, // Unique ID referencing the product in the cart, is required
+        },
+        quantity: {
+          type: Number,
           required: true,
         },
-        quantity: {type: Number, required: true},
       },
     ],
   },
 });
 
+// Method to add a product to the user's cart
 userSchema.methods.addToCart = function (product) {
   const cartProductIndex = this.cart.items.findIndex((cp) => {
     return cp.productId.toString() === product._id.toString();
@@ -48,6 +53,7 @@ userSchema.methods.addToCart = function (product) {
   return this.save();
 };
 
+// Method to remove a product from the user's cart
 userSchema.methods.removeFromCart = function (productId) {
   const updatedCartItems = this.cart.items.filter((item) => {
     return item.productId.toString() !== productId.toString();
@@ -56,6 +62,7 @@ userSchema.methods.removeFromCart = function (productId) {
   return this.save();
 };
 
+// Method to clear all items from the user's cart
 userSchema.methods.clearCart = function () {
   this.cart = {items: []};
   return this.save();

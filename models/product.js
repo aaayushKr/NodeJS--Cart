@@ -1,32 +1,33 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+// Define the structure of the 'products' collection in the MongoDB database using Mongoose Schema
 const productSchema = new Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   price: {
     type: Number,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   imageUrl: {
     type: String,
-    required: true
+    required: true,
   },
   userId: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  }
+    ref: "User", // Reference to the 'User' model in the database, indicating the creator of the product
+    required: true, // Unique ID referencing the user who created the product, is required
+  },
 });
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model("Product", productSchema);
 
 // const mongodb = require('mongodb');
 // const getDb = require('../util/database').getDb;
